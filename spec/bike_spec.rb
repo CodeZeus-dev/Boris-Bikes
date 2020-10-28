@@ -1,11 +1,7 @@
 require 'bike'
 
 describe Bike do
-  bike = described_class.new
-  describe "#working?" do
-    it "checks bike is working" do
-      expect(bike).to respond_to(:working?)
-    end
-  end
+
+  it { is_expected.to respond_to(:working?) }
 
 end
