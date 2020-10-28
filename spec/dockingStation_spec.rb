@@ -1,19 +1,16 @@
 require 'docking_station'
 
 describe DockingStation do
-  docking_station = described_class.new
 
-  describe "#release" do
-    
-    it "responds to release_bike method" do
-      expect(docking_station).to respond_to(:release_bike)
-    end
+  describe "#release_bike" do
 
-    it "responds to working? method in Bike class" do
-      bike = docking_station.release_bike
-      expect(bike).to respond_to(:working?)
-    end
+    it { is_expected.to respond_to(:release_bike) }
 
   end
 
+  describe "#working?" do
+    it "responds to the working? method of the Bike class" do
+      expect(subject.release_bike).to respond_to(:working?)
+    end
+  end
 end
