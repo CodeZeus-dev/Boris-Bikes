@@ -3,7 +3,7 @@ require 'bike'
 
 describe DockingStation do
 
-  describe "#release_bike" do
+  describe "release_bike" do
     it { is_expected.to respond_to(:release_bike) }
 
     it "releases a bike" do
@@ -17,7 +17,7 @@ describe DockingStation do
     end
   end
 
-  describe "#working?" do
+  describe "working?" do
     it "responds to the working? method of the Bike class" do
       subject.dock(Bike.new)
       bike = subject.release_bike
@@ -25,7 +25,7 @@ describe DockingStation do
     end
   end
 
-  describe "#dock" do
+  describe "dock" do
     it "docks the bike at the docking station" do
       expect(subject).to respond_to(:dock)
     end
@@ -35,9 +35,33 @@ describe DockingStation do
     end
   end
 
-  describe "#see_docked_bike" do
+  describe "see_docked_bike" do
     it "enables the user to see the docked bike" do
       expect(subject).to respond_to(:see_docked_bike)
+    end
+  end
+
+  describe "full?" do
+    it 'responds to full?' do
+      result = subject.send(:full?)
+      expect(result).to eq(false)
+    end
+
+    it 'when asked if its full it returns a bool' do
+      result = subject.send(:full?)
+      expect([true, false]).to include(result)
+    end
+  end
+
+  describe "empty_station?" do
+    it 'responds to empty_station?' do
+      result = subject.send(:empty_station?)
+      expect(result).to eq(true)
+    end
+
+    it 'returns a bool when asked if the station\'s empty' do
+      result = subject.send(:empty_station?)
+      expect([true, false]).to include(result)
     end
   end
 
