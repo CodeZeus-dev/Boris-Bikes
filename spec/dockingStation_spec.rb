@@ -7,9 +7,8 @@ describe DockingStation do
     it { is_expected.to respond_to(:release_bike) }
 
     it "releases a bike" do
-      docking_station = DockingStation.new
-      docking_station.dock(Bike.new)
-      bike = docking_station.release_bike
+      subject.dock(Bike.new)
+      bike = subject.release_bike
       expect(bike).to be_instance_of(Bike)
     end
 
@@ -20,9 +19,8 @@ describe DockingStation do
 
   describe "#working?" do
     it "responds to the working? method of the Bike class" do
-      docking_station = DockingStation.new
-      docking_station.dock(Bike.new)
-      bike = docking_station.release_bike
+      subject.dock(Bike.new)
+      bike = subject.release_bike
       expect(bike).to respond_to(:working?)
     end
   end
