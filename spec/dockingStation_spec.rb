@@ -1,12 +1,16 @@
 require 'docking_station'
+require 'bike'
 
 describe DockingStation do
 
   describe "#release_bike" do
     it { is_expected.to respond_to(:release_bike) }
 
-    it "gets a Bike instance" do
-      expect(subject.release_bike).not_to eq nil
+    it "releases a bike" do
+      docking_station = DockingStation.new
+      docking_station.dock(Bike.new)
+      bike = docking_station.release_bike
+      expect(bike).to be_instance_of(Bike)
     end
 
     it "raises an Exception" do
@@ -16,13 +20,20 @@ describe DockingStation do
 
   describe "#working?" do
     it "responds to the working? method of the Bike class" do
-      expect(subject.release_bike).to respond_to(:working?)
+      docking_station = DockingStation.new
+      docking_station.dock(Bike.new)
+      bike = docking_station.release_bike
+      expect(bike).to respond_to(:working?)
     end
   end
 
-  describe "#dock_bike" do
+  describe "#dock" do
     it "docks the bike at the docking station" do
-      expect(subject).to respond_to(:dock_bike)
+      expect(subject).to respond_to(:dock)
+    end
+
+    it "raises an Exception" do
+      expect { subject.dock() }.to raise_error(Exception)
     end
   end
 

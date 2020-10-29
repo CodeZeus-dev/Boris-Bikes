@@ -1,18 +1,25 @@
 class DockingStation
 
-  attr_reader :bike
+  attr_reader :bikes
 
-  def release_bike
-    raise Exception.new "Sorry, there are no bikes available." if @bike == nil
-    Bike.new if @bike != nil
+  def initialize
+    @bikes = []
   end
 
-  def dock_bike(bike)
-    @bike = bike
+  def release_bike
+    raise Exception.new "Sorry, there are no bikes available." if @bikes.empty?
+    @bikes.pop if !@bikes.empty?
+  end
+
+  def dock(bike)
+    raise Exception.new "Sorry, the docking station is in full capacity." if @bikes.length == 20
+    @bikes << bike if @bikes.length < 20
   end
 
   def see_docked_bike
-    puts @bike
+    @bikes.each { |bike|
+      puts bike
+    }
   end
 
 end
