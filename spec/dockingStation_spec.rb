@@ -5,8 +5,12 @@ describe DockingStation do
   describe "#release_bike" do
     it { is_expected.to respond_to(:release_bike) }
 
-    it "gets a bike" do
+    it "gets a Bike instance" do
       expect(subject.release_bike).not_to eq nil
+    end
+
+    it "raises an Exception" do
+      expect { subject.release_bike }.to raise_error(Exception)
     end
   end
 
