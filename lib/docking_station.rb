@@ -24,12 +24,6 @@ class DockingStation
     @bikes << bike
   end
 
-  def see_docked_bike
-    @bikes.each { |bike|
-      puts bike
-    }
-  end
-
   def report
     @broken_bikes << @bikes.pop
   end

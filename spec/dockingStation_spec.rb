@@ -44,12 +44,6 @@ describe DockingStation do
     end
   end
 
-  describe "see_docked_bike" do
-    it "enables the user to see the docked bike" do
-      expect(subject).to respond_to(:see_docked_bike)
-    end
-  end
-
   describe "full?" do
     it 'responds to full?' do
       result = subject.send(:full?)
