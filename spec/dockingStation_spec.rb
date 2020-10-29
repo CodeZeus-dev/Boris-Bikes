@@ -3,6 +3,15 @@ require 'bike'
 
 describe DockingStation do
 
+  it 'you can set the default_capacity' do
+    expect(DockingStation.new(5).default_reader).not_to eq(20)
+  end
+
+  it 'when you dont set it, its still 20' do
+    expect(DockingStation.new.default_reader).to eq(20)
+  end
+
+
   describe "release_bike" do
     it { is_expected.to respond_to(:release_bike) }
 
@@ -50,6 +59,12 @@ describe DockingStation do
     it 'when asked if its full it returns a bool' do
       result = subject.send(:full?)
       expect([true, false]).to include(result)
+    end
+
+    it 'returns true when @bikes.length == $DEFAULT_CAPACITY' do
+      $DEFAULT_CAPACITY.times { subject.dock(Bike.new) }
+      result = subject.send(:full?)
+      expect(result).to eq(true)
     end
   end
 
