@@ -3,14 +3,11 @@ require 'docking_station'
 describe DockingStation do
 
   describe "#release_bike" do
-
     it { is_expected.to respond_to(:release_bike) }
 
-  end
-
-  describe "gets_a_bike" do
-    subject { :release_bike }
-    it { is_expected.not_to eq nil }
+    it "gets a bike" do
+      expect(subject.release_bike).not_to eq nil
+    end
   end
 
   describe "#working?" do
