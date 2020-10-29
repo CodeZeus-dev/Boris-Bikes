@@ -80,4 +80,16 @@ describe DockingStation do
     end
   end
 
+  describe 'report' do
+    it "responds to report" do
+      expect(subject).to respond_to(:report)
+    end
+
+    it "moves the docked bike from the bikes array to the broken bikes array" do
+      subject.dock(Bike.new)
+      subject.report
+      expect(subject.broken_bikes[-1]).to be_instance_of(Bike)
+    end
+  end
+
 end

@@ -2,10 +2,11 @@ class DockingStation
 
   $DEFAULT_CAPACITY = 20
 
-  attr_reader :bikes
+  attr_reader :bikes, :broken_bikes
 
   def initialize(capacity = $DEFAULT_CAPACITY)
     @bikes = []
+    @broken_bikes = []
     @capacity = capacity
   end
 
@@ -27,6 +28,10 @@ class DockingStation
     @bikes.each { |bike|
       puts bike
     }
+  end
+
+  def report
+    @broken_bikes << @bikes.pop
   end
 
   private
