@@ -4,11 +4,11 @@ require 'bike'
 describe DockingStation do
 
   it 'you can set the default_capacity' do
-    expect(DockingStation.new(5).default_reader).not_to eq(20)
+    expect(DockingStation.new(5).capacity).not_to eq(20)
   end
 
   it 'when you dont set it, its still 20' do
-    expect(DockingStation.new.default_reader).to eq(20)
+    expect(DockingStation.new.capacity).to eq(20)
   end
 
 
@@ -62,18 +62,6 @@ describe DockingStation do
     end
   end
 
-  describe "empty_station?" do
-    it 'responds to empty_station?' do
-      result = subject.send(:empty_station?)
-      expect(result).to eq(true)
-    end
-
-    it 'returns a bool when asked if the station\'s empty' do
-      result = subject.send(:empty_station?)
-      expect([true, false]).to include(result)
-    end
-  end
-
   describe 'report' do
     it "responds to report" do
       expect(subject).to respond_to(:report)
@@ -83,6 +71,13 @@ describe DockingStation do
       subject.dock(Bike.new)
       subject.report
       expect(subject.broken_bikes[-1]).to be_instance_of(Bike)
+    end
+
+    it "decrements capacity by one" do
+      subject.dock(Bike.new)
+      capacity_before = subject.capacity
+      subject.report
+      expect(subject.capacity).to eq(capacity_before - 1)
     end
   end
 

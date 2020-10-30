@@ -2,7 +2,7 @@ class DockingStation
 
   $DEFAULT_CAPACITY = 20
 
-  attr_reader :bikes, :broken_bikes
+  attr_reader :bikes, :broken_bikes, :capacity
 
   def initialize(capacity = $DEFAULT_CAPACITY)
     @bikes = []
@@ -10,12 +10,8 @@ class DockingStation
     @capacity = capacity
   end
 
-  def default_reader
-    @capacity
-  end
-
   def release_bike
-      raise Exception.new "Sorry, there are no bikes available." if empty_station?
+      raise Exception.new "Sorry, there are no bikes available." if @bikes.empty?
       @bikes.pop
   end
 
@@ -26,17 +22,13 @@ class DockingStation
 
   def report
     @broken_bikes << @bikes.pop
+    @capacity -= 1
   end
 
   private
 
-  def empty_station?
-    return true if @bikes.length == 0
-    return false
-  end
-
   def full?
-    return true if @bikes.length == $DEFAULT_CAPACITY
+    return true if @bikes.length == @capacity
     return false
   end
 
