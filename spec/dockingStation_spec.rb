@@ -3,6 +3,8 @@ require 'bike'
 
 describe DockingStation do
 
+  let(:bike) { double :bike }
+
   it 'you can set the default_capacity' do
     expect(DockingStation.new(5).capacity).not_to eq(20)
   end
@@ -16,9 +18,9 @@ describe DockingStation do
     it { is_expected.to respond_to(:release_bike) }
 
     it "releases a bike" do
-      subject.dock double(:bike)
-      bike = subject.release_bike
-      expect(bike).to be_instance_of(Bike)
+      subject.dock(bike)
+      released_bike = subject.release_bike
+      expect(released_bike).to eq(bike)
     end
 
     it "raises an Exception" do
@@ -28,9 +30,10 @@ describe DockingStation do
 
   describe "working?" do
     it "responds to the working? method of the Bike class" do
-      subject.dock double(:bike)
-      bike = subject.release_bike
-      expect(bike).to respond_to(:working?)
+      allow(bike).to receive(:working?).and_return(true)
+      subject.dock(bike)
+      released_bike = subject.release_bike
+      expect(released_bike).to respond_to(:working?)
     end
   end
 
@@ -68,9 +71,9 @@ describe DockingStation do
     end
 
     it "moves the docked bike from the bikes array to the broken bikes array" do
-      subject.dock double(:bike)
+      subject.dock(bike)
       subject.report
-      expect(subject.broken_bikes[-1]).to be_instance_of(Bike)
+      expect(subject.broken_bikes[-1]).to eq(bike)
     end
 
     it "decrements capacity by one" do

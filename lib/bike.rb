@@ -1,7 +1,7 @@
 class Bike
 
   def working?
-    # p "Bike is working! Tadaa!"
+    true
   end
 
 end
