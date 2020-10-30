@@ -16,7 +16,7 @@ describe DockingStation do
     it { is_expected.to respond_to(:release_bike) }
 
     it "releases a bike" do
-      subject.dock(Bike.new)
+      subject.dock double(:bike)
       bike = subject.release_bike
       expect(bike).to be_instance_of(Bike)
     end
@@ -28,7 +28,7 @@ describe DockingStation do
 
   describe "working?" do
     it "responds to the working? method of the Bike class" do
-      subject.dock(Bike.new)
+      subject.dock double(:bike)
       bike = subject.release_bike
       expect(bike).to respond_to(:working?)
     end
@@ -68,13 +68,13 @@ describe DockingStation do
     end
 
     it "moves the docked bike from the bikes array to the broken bikes array" do
-      subject.dock(Bike.new)
+      subject.dock double(:bike)
       subject.report
       expect(subject.broken_bikes[-1]).to be_instance_of(Bike)
     end
 
     it "decrements capacity by one" do
-      subject.dock(Bike.new)
+      subject.dock double(:bike)
       capacity_before = subject.capacity
       subject.report
       expect(subject.capacity).to eq(capacity_before - 1)
